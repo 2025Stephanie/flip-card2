@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>翻牌遊戲</title>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      width: 100px;
+      height: 140px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .card-front {
+      background: #2c3e50;
+      color: white;
+    }
+
+    .card-back {
+      background: #ecf0f1;
+      color: #ba1861;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎴 翻牌抽禮遊戲</h1>
+  <p>點擊任一張卡片查看你獲得哪樣好禮！</p>
+
+  <div class="card-container">
+    <div class="card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">點我</div>
+        <div class="card-back">🎁 幸運禮</div>
+      </div>
+    </div>
+    <div class="card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">點我</div>
+        <div class="card-back">💰 發財禮</div>
+      </div>
+    </div>
+    <div class="card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">點我</div>
+        <div class="card-back">🕊️ 福氣禮</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function flipCard(card) {
+      // 如果已經翻過，就不再處理
+      if (card.classList.contains('flipped')) return;
+
+      // 翻牌
+      card.classList.add('flipped');
+
+      // 禁止再次點擊：移除 onclick 屬性
+      card.onclick = null;
+    }
+  </script>
+
+</body>
+</html>
