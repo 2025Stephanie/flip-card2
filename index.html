@@ -1,25 +1,46 @@
-rename to index.html
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <title>翻牌遊戲</title>
   <style>
-    body {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
       font-family: "Microsoft JhengHei", sans-serif;
-      text-align: center;
-      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 30px;
     }
 
     .card-container {
       display: flex;
       justify-content: center;
       gap: 20px;
+      width: 100%;
+      padding: 0 10px;
     }
 
     .card {
-      width: 100px;
-      height: 140px;
+      flex: 1;
+      max-width: 300px;
+      height: 60vh;
       perspective: 1000px;
       cursor: pointer;
     }
@@ -46,7 +67,7 @@ rename to index.html
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 24px;
     }
 
     .card-front {
@@ -55,8 +76,8 @@ rename to index.html
     }
 
     .card-back {
-      background: #ecf0f1;
-      color: #ba1861;
+      background: #a3d5ff; /* 暖色系藍色 */
+      color: #333;
       transform: rotateY(180deg);
     }
   </style>
@@ -64,7 +85,7 @@ rename to index.html
 <body>
 
   <h1>🎴 翻牌抽禮遊戲</h1>
-  <p>點擊任一張卡片查看你獲得哪樣好禮！</p>
+  <p>點擊任一張卡片查看你獲得的是哪一禮！</p>
 
   <div class="card-container">
     <div class="card" onclick="flipCard(this)">
@@ -88,15 +109,15 @@ rename to index.html
   </div>
 
   <script>
+    let hasFlipped = false;
+
     function flipCard(card) {
-      // 如果已經翻過，就不再處理
-      if (card.classList.contains('flipped')) return;
-
-      // 翻牌
+      if (hasFlipped) return;
       card.classList.add('flipped');
+      hasFlipped = true;
 
-      // 禁止再次點擊：移除 onclick 屬性
-      card.onclick = null;
+      const allCards = document.querySelectorAll('.card');
+      allCards.forEach(c => c.onclick = null);
     }
   </script>
 
